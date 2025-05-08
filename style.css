@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+.full-height {
+  height: 100vh;
+}
+.sidebar {
+  width: 220px;
+  background: linear-gradient(#7dddf2, #d9f9ff);
+  padding: 30px;
+  box-sizing: border-box;
+  
+}
+.profile-img {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 30%;
+  margin-bottom: 30px;
+}
+/* style.css 개선 */
+nav a {
+  display: flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  margin-bottom: 15px;
+  font-weight: bold;
+  gap: 8px;
+  transition: all 0.2s ease-in-out;
+  padding: 8px;
+  border-radius: 8px;
+}
+nav a:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
+  text-decoration: none; /* hover에서도 제거 */
+}
+.content {
+  padding: 60px;
+  flex-grow: 1;
+  background-color: #f9f9f9;
+  
+}
+.upload-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+}
+.upload-panel input,
+.upload-panel textarea {
+  width: 100%;
+  padding: 8px;
+  
+  box-sizing: border-box;
+}
+.upload-panel label {
+  font-weight: bold;
+  margin-top: 10px;
+}

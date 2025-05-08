@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>기타</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <a href="index.html"><img src="dino.png" alt="profile" class="profile-img" /></a>
+      <nav>
+        
+        <a href="project.html"><i class="fa-solid fa-briefcase"></i> 프로젝트</a>
+        <a href="artwork.html"><i class="fa-solid fa-image"></i> 작업물</a>
+        <a href="etc.html"><i class="fa-solid fa-flask"></i> 기타</a>
+        <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+        <a href="setting.html"><i class="fa-solid fa-gear"></i> 관리</a>
+      </nav>
+    </aside>
+    <main class="content">
+
+      <div id="uploadForm" style="display:none">
+        <input type="text" placeholder="제목">
+        <input type="text" placeholder="본문요약">
+        <textarea placeholder="본문"></textarea>
+        <input type="text" placeholder="링크">
+        <input type="file">
+        <button>업로드</button>
+      </div>
+      <h2>작업중인 내용</h2>
+      <div class="etc-list"></div>
+    </main>
+  </div>
+</body>
+</html>
