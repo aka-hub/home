@@ -1,6 +1,16 @@
+@font-face { 
+  font-family: 'NanumBarunGothic';
+  src: url('/fonts/NanumBarunGothic.eot');
+  src: url('/fonts/NanumBarunGothic.eot') 
+    format('embedded-opentype'),
+    url('/fonts/NanumBarunGothic.woff') 
+    format('woff');}
+
+
 body {
   margin: 0;
-  font-family: 'Noto Sans KR', sans-serif;
+  body {font-family: 'NanumBarunGothic', 'serif';}
+
 }
 .container {
   display: flex;
