@@ -1,16 +1,14 @@
 @font-face { 
-  font-family: 'NanumBarunGothic';
-  src: url('/fonts/NanumBarunGothic.eot');
-  src: url('/fonts/NanumBarunGothic.eot') 
-    format('embedded-opentype'),
-    url('/fonts/NanumBarunGothic.woff') 
-    format('woff');}
+  font-family: 'NanumGothic';
+  src: url('/fonts/NanumGothic.eot');
+  src: url('/fonts/NanumGothic.eot') format('embedded-opentype'),
+  url('/fonts/NanumGothic.woff') format('woff');}
+
 
 
 body {
   margin: 0;
-  body {font-family: 'NanumBarunGothic', 'serif';}
-
+  font-family: 'NanumGothic';
 }
 .container {
   display: flex;
@@ -75,4 +73,69 @@ nav a:hover {
 .upload-panel label {
   font-weight: bold;
   margin-top: 10px;
+}
+
+
+/* style.css 아래 추가 */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.project-card {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  background: white;
+  transition: transform 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.preview-box {
+  border: 1px solid #aaa;
+  padding: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.preview {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+.preview:hover {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+
+.preview-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px; /* 고정 높이 */
+  border: 1px solid #aaa;
+  margin-bottom: 15px;
+  background-color: white;
+}
+
+.preview-box img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.preview-box.no-image {
+  border: 1px solid #aaa;
+  padding: 20px;
+  text-align: center;
+  color: #555;
+  font-size: 0.9em;
 }
