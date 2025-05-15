@@ -22,6 +22,7 @@ body {
   background: linear-gradient(#7dddf2, #d9f9ff);
   padding: 30px;
   box-sizing: border-box;
+  flex-shrink: 0; 
   
 }
 .profile-img {
