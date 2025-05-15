@@ -37,45 +37,81 @@
       <div class="etc-list"></div>
     </main>
   </div>
-  <style>
-  .cursor-dot {
+ <style>
+  /* 커서 도트 기본 스타일 */
+  .cursor-dot, .cursor-trail {
     position: fixed;
     top: 0;
     left: 0;
     width: 8px;
     height: 8px;
-    background-color: #00bcd4;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.7;
-    transition: transform 0.08s ease-out;
     will-change: transform;
+  }
+
+  .cursor-dot {
+    background-color: #7dddf2;
+    box-shadow: 0 0 6px 3px white;
+    opacity: 1;
+    transition: transform 0.03s ease-out;
+  }
+
+  /* 트레일은 흐릿하고 작게 */
+  .cursor-trail {
+    background-color: #7dddf2;
+    opacity: 0.3;
+    box-shadow: 0 0 4px 2px white;
   }
 </style>
 
 <div class="cursor-dot" id="cursor-dot"></div>
+<!-- 트레일 도트 여러 개 추가 -->
+<div class="cursor-trail" id="trail1"></div>
+<div class="cursor-trail" id="trail2"></div>
+<div class="cursor-trail" id="trail3"></div>
 
 <script>
-  const dot = document.getElementById('cursor-dot');
+  const mainDot = document.getElementById('cursor-dot');
+  const trails = [
+    document.getElementById('trail1'),
+    document.getElementById('trail2'),
+    document.getElementById('trail3')
+  ];
+
   let mouseX = 0, mouseY = 0;
+  let currentX = 0, currentY = 0;
+  let trailPositions = [
+    { x: 0, y: 0 },
+    { x: 0, y: 0 },
+    { x: 0, y: 0 }
+  ];
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
   });
 
-  // 부드러운 따라오기
-  let currentX = 0, currentY = 0;
   function animate() {
-    currentX += (mouseX - currentX) * 0.15;
-    currentY += (mouseY - currentY) * 0.15;
-    dot.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    // 메인 도트 빠르게 따라오기
+    currentX += (mouseX - currentX) * 0.3;
+    currentY += (mouseY - currentY) * 0.3;
+    mainDot.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+    // 트레일은 더 천천히 따라오기
+    trailPositions.forEach((pos, i) => {
+      pos.x += (currentX - pos.x) * (0.15 - i * 0.03);
+      pos.y += (currentY - pos.y) * (0.15 - i * 0.03);
+      trails[i].style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+    });
+
     requestAnimationFrame(animate);
   }
 
   animate();
 </script>
+
 
 </body>
 </html>
