@@ -18,7 +18,7 @@ body {
   height: 100vh;
 }
 .sidebar {
-  width: 220px;
+  width: 300px;
   background: linear-gradient(#7dddf2, #d9f9ff);
   padding: 30px;
   box-sizing: border-box;
