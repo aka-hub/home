@@ -32,6 +32,7 @@ body {
 }
 /* style.css 개선 */
 nav a {
+  white-space: nowrap;
   display: flex;
   align-items: center;
   color: black;
