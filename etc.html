@@ -37,102 +37,122 @@
       <div class="etc-list"></div>
     </main>
   </div>
-<style>
-  body {
-    cursor: none; /* 기본 커서 제거 */
-  }
 
-  /* + 모양 커서 */
-  .cursor-plus {
-    position: fixed;
-    width: 14px;
-    height: 14px;
-    pointer-events: none;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-  }
+    <style>
+    * {
+      cursor: none !important; /* 기본 커서 완전 제거 */
+    }
 
-  .cursor-plus::before, .cursor-plus::after {
-    content: '';
-    position: absolute;
-    background-color: white;
-    box-shadow: 0 0 6px 2px #7dddf2;
-    border-radius: 1px;
-  }
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #111; /* 배경 어두워야 네온이 더 예쁨 */
+    }
 
-  .cursor-plus::before {
-    width: 2px;
-    height: 100%;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-  }
+    /* + 커서 스타일 */
+    .cursor-plus {
+      position: fixed;
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+    }
 
-  .cursor-plus::after {
-    width: 100%;
-    height: 2px;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-  }
+    .cursor-plus::before,
+    .cursor-plus::after {
+      content: '';
+      position: absolute;
+      background-color: white;
+      box-shadow: 0 0 6px 2px #7dddf2;
+      border-radius: 1px;
+      transition: transform 0.15s ease;
+    }
 
-  /* 입자(글리터) */
-  .glitter {
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    color: white;
-    font-size: 10px;
-    opacity: 0.8;
-    animation: glitter-fade 0.8s ease-out forwards;
-    text-shadow: 0 0 4px #7dddf2, 0 0 8px #7dddf2;
-  }
+    .cursor-plus::before {
+      width: 2px;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+    }
 
-  @keyframes glitter-fade {
-    0% { transform: scale(1); opacity: 0.8; }
-    100% { transform: scale(0.3); opacity: 0; }
-  }
-</style>
+    .cursor-plus::after {
+      width: 100%;
+      height: 2px;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
 
-<div class="cursor-plus" id="cursor-plus"></div>
+    .cursor-plus.clicked::before {
+      transform: scale(1.5) translateX(-50%);
+    }
 
-<script>
-  const cursor = document.getElementById('cursor-plus');
-  let mouseX = 0, mouseY = 0;
+    .cursor-plus.clicked::after {
+      transform: scale(1.5) translateY(-50%);
+    }
 
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    /* 글리터 */
+    .glitter {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9998;
+      color: white;
+      font-size: 10px;
+      opacity: 0.8;
+      animation: glitter-fade 0.8s ease-out forwards;
+      text-shadow: 0 0 4px #7dddf2, 0 0 8px #7dddf2;
+    }
 
-    // 커서 위치 이동
-    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    @keyframes glitter-fade {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(0.3); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
 
-    // 글리터 생성
+  <div class="cursor-plus" id="cursor-plus"></div>
+
+  <script>
+    const cursor = document.getElementById('cursor-plus');
+    let mouseX = 0, mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+
+  // 글리터 여러 개 생성
+  for (let i = 0; i < 3; i++) {  // ← 숫자 늘릴수록 더 많이 생김
     const glitter = document.createElement('div');
     glitter.className = 'glitter';
 
-    // 랜덤으로 + 또는 .
-    const chars = ['+', '.'];
-    glitter.textContent = chars[Math.floor(Math.random() * chars.length)];
+    // 무작위 위치 약간 퍼트리기
+    const offsetX = (Math.random() - 0.5) * 20;
+    const offsetY = (Math.random() - 0.5) * 20;
 
-    // 랜덤 크기
-    const size = Math.random() * 6 + 6; // 6px ~ 12px
+    glitter.textContent = Math.random() < 0.5 ? '+' : '.';
+    const size = Math.random() * 8 + 6; // ← 크기도 넓힘 (6~14px)
     glitter.style.fontSize = `${size}px`;
-
-    // 위치 조정
-    glitter.style.left = (mouseX - size / 2) + 'px';
-    glitter.style.top = (mouseY - size / 2) + 'px';
+    glitter.style.left = (mouseX + offsetX - size / 2) + 'px';
+    glitter.style.top = (mouseY + offsetY - size / 2) + 'px';
 
     document.body.appendChild(glitter);
+    setTimeout(() => glitter.remove(), 800);
+  }
+});
 
-    // 일정 시간 후 제거
-    setTimeout(() => {
-      glitter.remove();
-    }, 800);
-  });
-</script>
-
-
+    // 클릭 시 커서 확대
+    document.addEventListener('mousedown', () => {
+      cursor.classList.add('clicked');
+    });
+    document.addEventListener('mouseup', () => {
+      cursor.classList.remove('clicked');
+    });
+  </script>
+  
 </body>
 </html>
